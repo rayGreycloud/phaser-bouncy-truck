@@ -14,11 +14,20 @@ let state = {
 let game = new Phaser.Game(width, height, renderer, parent, state);
 
 // Initialize app variables
-
+let truck, wheels, wheelMaterial;
+// Show physics body polygons
+let showBodies = false;
+// Truck bounce flag
+let allowTruckBounce = true;
 
 // Preload state
 function preload() {
+  // Set background color
 
+  // Load assets
+
+  // Load physics data
+  
 }
 
 // Create state
