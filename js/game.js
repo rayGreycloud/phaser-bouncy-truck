@@ -94,7 +94,24 @@ function create() {
 
 // Update state
 function update() {
+  let rotationSpeed = 300;
 
+  // Rotate wheels left
+  if (cursors.left.isDown) {
+    wheels.children.forEach(function (wheel, index) {
+      wheel.body.rotateLeft(rotationSpeed);
+    });
+  // Rotate wheels right
+  } else if (cursors.right.isDown) {
+    wheels.children.forEach(function (wheel, index) {
+      wheel.body.rotateRight(rotationSpeed);
+    });
+  // Remove rotation if no arrow down
+  } else {
+    wheels.children.forEach(function (wheel, index) {
+      wheels.body.setZeroRotation();
+    });
+  }
 }
 
 // Helper functions
