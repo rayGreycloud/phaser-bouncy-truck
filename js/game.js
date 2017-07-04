@@ -14,7 +14,7 @@ let state = {
 let game = new Phaser.Game(width, height, renderer, parent, state);
 
 // Initialize app variables
-let truck, wheels, wheelMaterial;
+var truck, wheels, wheelMaterial, cursors;
 // Show physics body polygons
 let showBodies = false;
 // Truck bounce flag
@@ -37,7 +37,7 @@ function create() {
   // Set world boundaries
   game.world.setBounds(0, 0, width*2, height);
   // Start physics engine
-  game.physics.startSystem(Phaser.Physics.P2J2);
+  game.physics.startSystem(Phaser.Physics.P2JS);
   // Set gravity
   game.physics.p2.gravity.y = 300;
 
@@ -94,7 +94,7 @@ function create() {
 
 // Update state
 function update() {
-  let rotationSpeed = 300;
+  var rotationSpeed = 300;
 
   // Rotate wheels left
   if (cursors.left.isDown) {
@@ -109,7 +109,7 @@ function update() {
   // Remove rotation if no arrow down
   } else {
     wheels.children.forEach(function (wheel, index) {
-      wheels.body.setZeroRotation();
+      wheel.body.setZeroRotation();
     });
   }
 }
