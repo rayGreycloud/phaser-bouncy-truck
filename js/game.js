@@ -115,3 +115,40 @@ function update() {
 }
 
 // Helper functions
+// Initialize wheel with coordinate array
+function initWheel(offsetFromTruck) {
+  var truckX = truck.position.x;
+  var truckY = truck.position.y;
+  // Position wheel
+  var wheel = game.add.sprite(truckX + offsetFromTruck[0], truckY + offsetFromTruck[1], 'wheel');
+  // Enable physics
+  game.physics.p2.enable(wheel, showBodies);
+  // Remove default shape
+  wheel.body.clearShapes();
+  // Add circle to wheel body
+  wheel.body.addCircle(15.5);
+
+  // Fix wheel to truck
+  var maxForce = 100;
+  var rev = game.physics.p2.createRevoluteConstraint(truck.body, offsetFromTruck, wheel.body, [0,0], maxForce);
+  // Add wheel to wheels group
+  wheels.add(wheel);
+  // Check if bounce allowed
+  wheel.body.onBeginContact.add(onWheelContact, game);
+
+  wheel.body.setMaterial(wheelMaterial);
+
+  return wheel;
+}
+
+// Called on wheel contact
+function onWheelContact(phaserBody, p2Body) {
+  // If wheel touching bottom boundary
+  // Bottom has no phaserBody and id 4
+  if ((phaserBody === null && p2Body.id == 4) ||
+  // Or if wheel touching hill
+    (phaserBody && phaserBody.sprite.key == 'hill')) {
+    // Allow truck bounce
+    allowTruckBounce = true;
+  }
+}
