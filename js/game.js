@@ -23,11 +23,13 @@ let allowTruckBounce = true;
 // Preload state
 function preload() {
   // Set background color
-
+  game.stage.backgroundColor = '#eee';
   // Load assets
-
+  game.load.image('truck', 'assets/truck.png');
+  game.load.image('wheel', 'assets/wheel.png');
+  game.load.image('hill', 'assets/hill.png');
   // Load physics data
-  
+  game.load.physics('physics', 'data/physics.json');
 }
 
 // Create state
